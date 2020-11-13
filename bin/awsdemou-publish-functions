@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# AWS Demo University - Publish Packages
+# AWS Demo University - Publish Functions
 #
 
 bindir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
