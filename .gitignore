@@ -4,8 +4,13 @@ new/
 tmp/
 save/
 
-# Packages
-target/
+# Artifacts
+bucket/
+
+# Log files
+logs
+*.log
+*.log.*
 
 # Junk
 .DS_Store

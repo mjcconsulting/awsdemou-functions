@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# AWS Demo University - Publish Packages
+#
+
+bindir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+rootdir=${bindir%/*}
+srcdir=$rootdir/src
+bucketdir=$rootdir/bucket
+timestamp=$(date +%Y%M%d-%H%M%S)
+
+echo "Publishing Packages"
+echo " - src   : $srcdir"
+echo " - bucket: $bucketdir"
+
+pushd $srcdir &> /dev/null
+for directory in $(ls -1d */ | sed -E -e '/^[a-z]{1,4}\/$/d;s/\/$//'); do
+  echo -n "- $directory... "
+  mkdir -p $bucketdir/$directory
+  (cd $directory; zip -X -r $bucketdir/$directory/$timestamp.zip ./* > /dev/null)
+  md5=$(md5 -q $bucketdir/$directory/$timestamp.zip)
+  if [ ! -f $bucketdir/$directory/$md5.zip ]; then
+    echo "Published ($md5.zip)"
+    mv $bucketdir/$directory/$timestamp.zip $bucketdir/$directory/$md5.zip
+  else
+    echo "Unchanged"
+  fi
+  rm -f $bucketdir/$directory/????????-??????.zip
+done
+popd &> /dev/null
