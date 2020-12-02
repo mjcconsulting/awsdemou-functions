@@ -1,3 +1,9 @@
+/**
+* Document: A Lambda function that creates a Systems Manager Document in either YAML or JSON format,
+* from either in-lin content or external content stored in an S3 Bucket.
+* Currently only Command Documents are supported.
+**/
+
 const response = require('cfn-response-promise');
 
 const AWS = require('aws-sdk');
