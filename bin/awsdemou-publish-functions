@@ -9,7 +9,7 @@ srcdir=$rootdir/src
 bucketdir=$rootdir/bucket
 timestamp=$(date +%Y%M%d-%H%M%S)
 
-echo "Publishing Packages"
+echo "Publishing Functions"
 echo " - src   : $srcdir"
 echo " - bucket: $bucketdir"
 
